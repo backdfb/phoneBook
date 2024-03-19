@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import contactsSlice from './slices/contactsSlice'; 
-import { loadState, saveState } from '../utils/localStorage';
+import { loadState, saveState } from './utils/localStorage';
 
 const persistedState = loadState();
 

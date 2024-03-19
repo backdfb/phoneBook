@@ -1,44 +1,38 @@
 import React, { useState } from 'react';
+import {Form, Button} from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { addContact } from './actions'; // 액션 생성자를 임포트합니다.
 
 const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const dispatch = useDispatch(); // useDispatch 훅을 사용해 dispatch 함수를 가져옵니다.
+    const[name, setName] = useState('');
+    const[phoneNumber, setphoneNumber] = useState(0);
+    const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addContact({ name, phone })); // addContact 액션을 디스패치하여 연락처를 추가합니다.
-    setName('');
-    setPhone('');
-  };
+    const addContact = (event) => {
+        event.preventDefault();
+        dispatch({
+            type: 'ADD_CONTACT',
+            payload: {name, phoneNumber},
+        });
+    };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">이름:</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="phone">전화번호:</label>
-        <input
-          type="text"
-          id="phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">저장</button>
-    </form>
-  );
+return(
+    <Form onSubmit={addContact}>
+      <Form.Group className="mb-3" controlId="formName">
+        <Form.Label> 이름 </Form.Label>
+        <Form.Control type="text" placeholder="이름을 입력해주세요" 
+        onChange={(event) => setName(event.target.value)} />
+        </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formContact">
+        <Form.Label> 전화번호 </Form.Label>
+        <Form.Control type="number" placeholder="전화번호를 입력해주세요" 
+        onChange={(event) => setphoneNumber(event.target.value)}/>
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        추가
+      </Button>
+    </Form>
+ );
 };
 
 export default ContactForm;
