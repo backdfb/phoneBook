@@ -7,10 +7,11 @@ const initialState = {
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState,
+  initialState, //초기값
   reducers: {
-    addContact: (state, action) => {
+    addContact: (state, action) => { //state: 초기값, action: 객체
       state.contacts.push(action.payload);
+      console.log(state.contacts);
     },
     deleteContact: (state, action) => {
       state.contacts = state.contacts.filter(contact => contact.id !== action.payload);

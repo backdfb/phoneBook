@@ -9,7 +9,7 @@ const ContactList = () =>{
     return(
         <div>
             <SearchBar/>
-            {contactList.map((item) => (
+            {contactList?.map((item) => (
                 <ContactItem item={item}/>
             ))}
         </div>
